@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_challenge/bloc/home_bloc/home_bloc.dart';
 import 'package:flutter_challenge/bloc/page_change_cubit.dart';
 import 'package:flutter_challenge/constants/app.colors.dart';
 import 'package:flutter_challenge/screen/splash/splash_screen.dart';
@@ -12,7 +13,10 @@ class ChallengeApp extends StatelessWidget{
       providers: [
         BlocProvider<PageChangeCubit>(
           create: (BuildContext context) => PageChangeCubit(),
-        )
+        ),
+        BlocProvider<HomeBloc>(
+          create: (BuildContext context) => HomeBloc(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Challenge',

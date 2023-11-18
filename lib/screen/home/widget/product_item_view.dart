@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_challenge/constants/app.textsize.dart';
+import 'package:flutter_challenge/extensions/string_extension.dart';
+import 'package:flutter_challenge/models/product_entity.dart';
 import 'package:flutter_challenge/screen/widget/image_widget.dart';
 
 class ProductItemView extends StatelessWidget{
+  ProductEntity data;
+  ProductItemView(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class ProductItemView extends StatelessWidget{
             width: 150,
             height: 100,
             child: ImageView(
-              url: "https://www.skincenterofsouthmiami.com/wp-content/uploads/2018/06/Skin-Center-of-South-Miami-Facials-and-Skin-Care.jpg",
+              url: data.thumbnail,
               width: 150,
               height: 100,
               fit: BoxFit.cover,
@@ -26,16 +30,18 @@ class ProductItemView extends StatelessWidget{
           Flexible(
             flex: 2,
             child: Padding(
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10,right: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("iPhone 9",
+                  Text(data.title.orEmpty(),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextSize.largeBlack),
                   const SizedBox(height: 10,),
-                  Text("An apple mobile which is nothing like apple")
+                  Text(data.description.orEmpty(),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,)
                 ],
               ),
             ),

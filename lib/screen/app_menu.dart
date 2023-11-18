@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_challenge/bloc/page_change_cubit.dart';
-import 'package:flutter_challenge/screen/products/products_by_category_screen.dart';
+import 'package:flutter_challenge/screen/home/presenter/home_presenter.dart';
+import 'package:flutter_challenge/screen/home/products_by_category_screen.dart';
 import 'package:flutter_challenge/screen/widget/drawer_widget.dart';
 
 import '../constants/app.colors.dart';
@@ -66,9 +67,12 @@ class AppMenuState extends State<AppMenu>{
               children: <Widget>[
                 HomeScreen(onCategorySelect: (selectedCategory){
                   context.read<PageChangeCubit>().changeTheme(selectedCategory);
+                  HomePresenter.loadProducts(context, selectedCategory);
                   controller?.jumpToPage(1);
                 }),
-                ProductListByCategoryScreen(""),
+                ProductListByCategoryScreen((currentCategory){
+                  HomePresenter.loadProducts(context, currentCategory);
+                }),
               ],
               onPageChanged: (page) {
                 _onTapped(page);
