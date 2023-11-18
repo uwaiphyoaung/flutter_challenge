@@ -6,10 +6,10 @@ class HomePresenter{
   const HomePresenter._();
 
   static void loadCategory(BuildContext context) {
-    BlocProvider.of<HomeBloc>(context).add(LoadCategoryEvent());
+    BlocProvider.of<HomeBloc>(context).add(LoadCategoryEvent(context));
   }
 
   static void loadProducts(BuildContext context, String category) {
-    BlocProvider.of<HomeBloc>(context).add(LoadProductByCategoryEvent(category));
+    BlocProvider.of<HomeBloc>(context).add(LoadProductByCategoryEvent(context,category));
   }
 }

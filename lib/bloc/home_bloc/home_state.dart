@@ -8,7 +8,7 @@ class HomeInitial extends HomeState {}
 class HomeResetState extends HomeState {}
 
 class CategorySuccessState extends HomeState{
-  List<String> data;
+  List<CategoryEntity> data;
   CategorySuccessState(this.data);
 }
 

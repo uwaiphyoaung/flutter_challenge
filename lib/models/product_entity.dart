@@ -15,6 +15,14 @@ class ProductList{
 }
 
 class ProductEntity{
+
+  static const String TABLE_NAME = "product_table";
+  static const String COLUMN_ID = "id";
+  static const String COLUMN_TITLE = "title";
+  static const String COLUMN_DESCRIPTION = "description";
+  static const String COLUMN_THUMBNAIL = "thumbnail";
+  static const String COLUMN_CATEGORY = "category";
+
   int? id;
   String? title;
   String? description;
@@ -41,5 +49,15 @@ class ProductEntity{
     if(json['images'] != null){
       images = json['images'].cast<String>();
     }
+  }
+
+  Map<String, dynamic> toDatabaseJson() {
+    final data = <String, dynamic>{};
+    data[COLUMN_ID] = id;
+    data[COLUMN_TITLE] = title;
+    data[COLUMN_DESCRIPTION] = description;
+    data[COLUMN_THUMBNAIL] = thumbnail;
+    data[COLUMN_CATEGORY] = category;
+    return data;
   }
 }
