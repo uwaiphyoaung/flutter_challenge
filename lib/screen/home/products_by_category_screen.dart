@@ -57,10 +57,4 @@ class ProductListByCategoryScreenState
       ),
     );
   }
-
-  @override
-  void dispose() {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    super.dispose();
-  }
 }

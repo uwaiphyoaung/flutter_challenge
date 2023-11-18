@@ -71,10 +71,4 @@ class HomeScreenState extends State<HomeScreen>{
     );
   }
 
-  @override
-  void dispose() {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    super.dispose();
-  }
-
 }
