@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_challenge/api/api_response.dart';
 import 'package:flutter_challenge/bloc/home_bloc/home_bloc.dart';
 import 'package:flutter_challenge/constants/app.colors.dart';
+import 'package:flutter_challenge/localization/app_locale.dart';
 import 'package:flutter_challenge/screen/widget/loading_widget.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 import '../widget/error_widget.dart';
 import 'widget/product_item_view.dart';
@@ -29,7 +31,7 @@ class ProductListByCategoryScreenState
           if (state is ProductListSuccessState) {
             if (state.data != null) {
               if (state.data!.isEmpty) {
-                return AppErrorWidget(ApiError("No Products", 0),
+                return AppErrorWidget(ApiError(AppLocale.noProduct.getString(context), 0),
                     onReload: () {});
               }
               return ListView.builder(
@@ -39,7 +41,7 @@ class ProductListByCategoryScreenState
                 },
               );
             } else {
-              return AppErrorWidget(ApiError("Something went wrong", -2),
+              return AppErrorWidget(ApiError(AppLocale.somethingWentWrong.getString(context), -2),
                   onReload: () {
                 widget.onReload(state.categoryName);
               });
@@ -50,7 +52,7 @@ class ProductListByCategoryScreenState
               widget.onReload(state.categoryName);
             });
           }
-          return showLoading();
+          return LoadingWidget();
         },
       ),
     );

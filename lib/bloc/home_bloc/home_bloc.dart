@@ -21,7 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<LoadCategoryEvent>((event, emit) async{
       emit(HomeResetState());
-      final response = await service.loadCategory();
+      final response = await service.loadCategory(event.context);
       if(response is Fail){
         var localData = await CategoryDao().getAll();
         if(localData.isEmpty){
@@ -44,7 +44,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<LoadProductByCategoryEvent>((event, emit) async{
       emit(HomeResetState());
-      final response = await service.productsByCategory(event.name);
+      final response = await service.productsByCategory(event.name,event.context);
       if(response is Fail){
         var localData = await ProductDao().getProductsByCategory(event.name);
         if(localData.isEmpty){

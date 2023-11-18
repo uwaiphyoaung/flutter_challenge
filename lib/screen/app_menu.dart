@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_challenge/bloc/page_change_cubit.dart';
+import 'package:flutter_challenge/localization/app_locale.dart';
 import 'package:flutter_challenge/screen/home/presenter/home_presenter.dart';
 import 'package:flutter_challenge/screen/home/products_by_category_screen.dart';
 import 'package:flutter_challenge/screen/widget/drawer_widget.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 import '../constants/app.colors.dart';
 import 'home/home_screen.dart';
@@ -41,7 +43,7 @@ class AppMenuState extends State<AppMenu>{
             return false;
           }else{
             if(_tabSelectedIndex > 0){
-              context.read<PageChangeCubit>().changeTheme("Home");
+              context.read<PageChangeCubit>().changeTheme("");
               controller?.jumpToPage(0);
               return false;
             }else{
@@ -56,11 +58,15 @@ class AppMenuState extends State<AppMenu>{
             centerTitle: true,
             title: BlocBuilder<PageChangeCubit, String>(
               builder: (context, state) {
-                return Text(state);
+                return Text(state.isEmpty?AppLocale.home.getString(context):state);
               },
             ),
           ),
-          drawer: DrawerWidget(),
+          drawer: DrawerWidget((){
+            if(_scaffoldKey.currentState?.isDrawerOpen == true){
+              _scaffoldKey.currentState?.closeDrawer();
+            }
+          }),
           body: PageView(
               physics: const NeverScrollableScrollPhysics(),
               controller: controller,

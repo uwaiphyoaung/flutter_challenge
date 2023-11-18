@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_challenge/api/api_response.dart';
+import 'package:flutter_challenge/localization/app_locale.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 import '../../constants/app.colors.dart';
 
@@ -28,7 +30,7 @@ class AppErrorWidget extends StatelessWidget{
                     padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12)),
                 onPressed: onReload,
-                child: const Text('Try Again'),
+                child: Text(AppLocale.tryAgain.getString(context)),
               ),
             ),
           ])),

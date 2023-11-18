@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localization: any
   http: any
   path: any
   sqflite: ^2.3.0

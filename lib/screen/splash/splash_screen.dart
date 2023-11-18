@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget{
 class SplashScreenState extends State<SplashScreen>{
 
   void startTimer(){
-    var duration = const Duration(seconds: 5);
+    var duration = const Duration(seconds: 3);
     Timer.periodic(duration, (timer) {
       timer.cancel();
       context.replace(AppMenu());
@@ -31,7 +31,7 @@ class SplashScreenState extends State<SplashScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: showLoading(),
+        child: LoadingWidget(),
       ),
     );
   }

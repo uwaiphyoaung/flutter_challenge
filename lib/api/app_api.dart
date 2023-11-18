@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_challenge/localization/app_locale.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:http/http.dart';
 
 import 'api_response.dart';
@@ -15,7 +18,7 @@ class API {
     "content-type": "application/json"
   };
 
-  Future<ApiResponse> get(String url) async {
+  Future<ApiResponse> get(String url, BuildContext context) async {
     if (kDebugMode) {
       print("calling -> $url");
     }
@@ -31,12 +34,16 @@ class API {
         case 200:
           return Success(response.body);
         default:
-          return Fail(ApiError("Something went wrong", response.statusCode));
+          // ignore: use_build_context_synchronously
+          var errorMsg = AppLocale.somethingWentWrong.getString(context);
+          return Fail(ApiError(errorMsg, response.statusCode));
       }
     } on SocketException {
-      return Fail(ApiError("Internet Connection Lost", -1));
+      // ignore: use_build_context_synchronously
+      return Fail(ApiError(AppLocale.connectionLost.getString(context), -1));
     } on Exception catch (e) {
-      return Fail(ApiError("Something went wrong", -2));
+      // ignore: use_build_context_synchronously
+      return Fail(ApiError(AppLocale.somethingWentWrong.getString(context), -2));
     }
   }
 }
